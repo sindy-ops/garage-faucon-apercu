@@ -25,7 +25,7 @@
 }
 :root:not([data-theme="light"]),:root[data-theme="dark"]{color-scheme:dark}
 @media(min-width:600px){:root{--gut:24px}}
-@media(min-width:900px){:root{--gut:32px;--left:208px}}
+@media(min-width:900px){:root{--gut:32px;--left:240px}}
 *{box-sizing:inherit;margin:0}
 html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 body{background:var(--black);color:var(--cream);font-family:Barlow,"Helvetica Neue",Arial,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -256,6 +256,54 @@ html{scrollbar-color:var(--steel-2) var(--black)}
   .g-needle{transform:rotate(68.4deg);animation:none!important;transition:none}
   .dial .g-needle{transform:rotate(var(--a,-90deg))}
 }
+
+/* ===== sections épinglées : phrase qui s'allume + vue éclatée ===== */
+.pinned{position:relative;z-index:1;background:var(--black)}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden}
+.say{height:260svh}.capot{height:480svh}
+.static{height:auto!important}.static .pin{position:relative!important;height:auto!important;min-height:0}
+.say .pin{display:grid;align-items:center;padding:var(--bar) var(--gut) var(--s6) var(--left)}
+.say-t{font-family:Barlow,Helvetica,Arial,sans-serif;font-weight:600;font-size:clamp(1.9rem,4.4vw,4rem);line-height:1.14;letter-spacing:-.01em;max-width:24em;text-wrap:balance;color:var(--cream)}
+.js .w{color:#5E6770;transition:color .25s var(--ease-out)}
+.js .w.lit{color:var(--cream)}
+.js .w.k.lit{color:var(--yellow)}
+.js .static .w{color:var(--cream)}.js .static .w.k{color:var(--yellow)}
+.capot .pin{display:grid;gap:var(--s4);padding:var(--bar) var(--gut) var(--s5) var(--left);align-content:center}
+.cap-text h2{font-size:clamp(3rem,9vw,7rem);color:var(--cream)}
+.hint{display:none;color:var(--chrome);margin-top:var(--s3)}
+.capot.noact .hint{display:block}
+.steps{list-style:none;padding:0;margin:var(--s4) 0 0;border-top:1px solid var(--steel-2)}
+.steps li{display:grid;grid-template-columns:auto 1fr;column-gap:var(--s3);align-items:baseline;padding:var(--s2) 0;border-bottom:1px solid var(--steel-2);opacity:.4;transition:opacity .25s var(--ease-out)}
+.steps .n{font-family:Anton,Impact,sans-serif;font-size:1.25rem;color:var(--yellow);font-variant-numeric:tabular-nums}
+.steps b{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:1.25rem;letter-spacing:.02em;text-transform:uppercase;color:var(--cream)}
+.steps p{grid-column:2;display:none;margin:var(--s1) 0 0;color:var(--chrome);max-width:40ch}
+.steps li.on{opacity:1}.steps li.on p{display:block}
+.dots{display:none;gap:var(--s2);margin-top:var(--s3)}
+.dots i{flex:1;height:3px;background:var(--steel-2);transition:background-color .25s var(--ease-out)}
+.dots i.on{background:var(--yellow)}
+.cap-fig{min-height:0;display:grid;align-items:center}
+.cap-svg{display:block;width:100%;height:auto;max-height:62svh;overflow:visible}
+.cap-svg .ground{stroke:var(--steel-2);stroke-width:1.5;vector-effect:non-scaling-stroke;opacity:calc(1 - var(--e0,0))}
+.cap-svg .part{transform:translate(calc(var(--k,0)*var(--dx,0px)),calc(var(--k,0)*var(--dy,0px)));transition:opacity .25s var(--ease-out)}
+.cap-svg .part *{fill:#242a30;stroke:var(--cream);stroke-width:1.8px;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round;transition:stroke .25s var(--ease-out)}
+.cap-svg .chassis path:first-child{fill:#1d2227}
+.cap-svg .tire{fill:#15181b}.cap-svg .rim{fill:#242a30;stroke:var(--steel-2)}.cap-svg .hub{fill:#3a4047}
+.cap-svg .wheel line{stroke:var(--steel-2)}
+.cap-svg .glass{fill:rgba(245,196,0,.1);stroke:var(--steel-2)}
+.cap-svg .headlight path{fill:rgba(245,196,0,.3);stroke:var(--yellow)}
+.cap-svg .band,.cap-svg .chip{fill:rgba(245,196,0,.35);stroke:var(--yellow)}
+.cap-svg .key *,.cap-svg .engine line,.cap-svg .ecu line{fill:none}
+.cap-svg .key circle{fill:#242a30}
+.cap-svg .engine rect{fill:#2c3238}
+.cap-svg .spin{transform:rotate(calc(var(--k,0)*540deg));transform-box:fill-box;transform-origin:center}
+.cap-svg.has-hot .part:not(.hot){opacity:.25}
+.cap-svg .part.hot *{stroke:var(--yellow)}
+.cap-svg .part.hot{filter:drop-shadow(0 0 10px rgba(245,196,0,.55))}
+@media(max-width:1099px){.steps li:not(.on){display:none}.steps{border-top:0;margin-top:var(--s3)}.dots{display:flex}.capot .cap-text h2{font-size:clamp(2.4rem,11vw,4rem)}}
+@media(min-width:1100px){.capot .pin{grid-template-columns:minmax(0,5fr) minmax(0,8fr);gap:var(--s6);align-items:center}.cap-svg{max-height:68svh}}
+.static .steps li{display:grid!important;opacity:1}.static .steps p{display:block}.static .dots,.static .hint{display:none!important}
+.static.capot .pin{padding-top:var(--bar);padding-bottom:var(--s6)}
+@media(prefers-reduced-motion:reduce){.pinned{height:auto}.pin{position:relative;height:auto}.js .w{color:var(--cream);transition:none}.js .w.k{color:var(--yellow)}.steps li{display:grid!important;opacity:1}.steps p{display:block}.dots,.hint{display:none!important}.cap-svg .part{transition:none}}
 </style>
 </head>
 <body>
@@ -273,6 +321,7 @@ html{scrollbar-color:var(--steel-2) var(--black)}
 <nav class="index" aria-label="Chapitres">
   <a href="#accueil" data-i="accueil">Accueil</a>
   <a href="#atelier" data-i="atelier">Atelier</a>
+  <a href="#capot" data-i="capot">Sous le capot</a>
   <a href="#urgences" data-i="urgences">En panne</a>
   <a href="#contact" data-i="contact">Contact</a>
 </nav>
@@ -298,6 +347,10 @@ html{scrollbar-color:var(--steel-2) var(--black)}
 
 <div class="marquee" aria-hidden="true"><div class="mq"><span><b>Entretien</b><i></i><b>Réparation</b><i></i><b>Pneus</b><i></i><b>Diagnostic</b><i></i><b>Clés</b><i></i><b>Véhicules</b><i></i></span><span><b>Entretien</b><i></i><b>Réparation</b><i></i><b>Pneus</b><i></i><b>Diagnostic</b><i></i><b>Clés</b><i></i><b>Véhicules</b><i></i></span></div></div>
 
+<section class="pinned say" id="say" aria-label="Le Garage Faucon en une phrase">
+  <div class="pin"><p class="say-t"><span class="w">Un</span> <span class="w">voyant</span> <span class="w">s’allume.</span> <span class="w">Une</span> <span class="w">panne</span> <span class="w">vous</span> <span class="w">arrête.</span> <span class="w">Une</span> <span class="w">révision</span> <span class="w">approche.</span> <span class="w">Le</span> <span class="w k">Garage</span> <span class="w k">Faucon</span> <span class="w">répare,</span> <span class="w">entretient</span> <span class="w">et</span> <span class="w">diagnostique</span> <span class="w">votre</span> <span class="w">Renault</span> <span class="w">ou</span> <span class="w">Dacia,</span> <span class="w">et</span> <span class="w">propose</span> <span class="w">des</span> <span class="w">véhicules</span> <span class="w">neufs</span> <span class="w">et</span> <span class="w">d’occasion.</span></p></div>
+</section>
+
 <section class="chapter" id="atelier">
   <div class="pad atelier-head rv">
     <h2 class="display">L’atelier</h2>
@@ -313,6 +366,29 @@ html{scrollbar-color:var(--steel-2) var(--black)}
     <article class="card"><h3>Clés</h3><p>Une clé perdue ou à remplacer ? Elle se commande, le rendez-vous se prend par téléphone.</p></article>
   </div>
   <div class="rail-hint"><button type="button" id="prev" aria-label="Prestation précédente">←</button><button type="button" id="next" aria-label="Prestation suivante">→</button></div>
+</section>
+
+<section class="pinned capot" id="capot" aria-label="Sous le capot : les services du garage">
+  <div class="pin">
+    <div class="cap-text">
+      <h2 class="display">Sous le capot</h2>
+      <p class="hint">Faites défiler : on ouvre la voiture.</p>
+      <ol class="steps"><li data-part="filter"><span class="n">01</span><b>Entretien et révision</b><p>Entretien courant et révision de votre Renault ou Dacia.</p></li><li data-part="engine"><span class="n">02</span><b>Réparation mécanique</b><p>Panne, voyant allumé, démarrage difficile : l’atelier répare et vous tient au courant par téléphone.</p></li><li data-part="wheel"><span class="n">03</span><b>Pneus</b><p>Réparation et remplacement de pneus.</p></li><li data-part="ecu"><span class="n">04</span><b>Diagnostic</b><p>Quand la cause d’un voyant ou d’un bruit n’est pas évidente, l’atelier cherche d’où ça vient.</p></li><li data-part="key"><span class="n">05</span><b>Clés</b><p>Une clé perdue ou à remplacer ? Elle se commande, le rendez-vous se prend par téléphone.</p></li><li data-part="chassis cabin headlight"><span class="n">06</span><b>Véhicules</b><p>Véhicules neufs et d’occasion. Appelez l’atelier pour savoir ce qui est disponible.</p></li></ol>
+      <div class="dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    </div>
+    <div class="cap-fig"><svg class="cap-svg" viewBox="0 0 1000 560" role="img" aria-label="Vue éclatée d’une voiture : filtre, moteur, roues, boîtier électronique, clé et carrosserie" focusable="false">
+  <line class="ground" x1="40" y1="424" x2="980" y2="424"/>
+  <g class="part wheel wf" data-d=".02" style="--dx:-20px;--dy:95px"><g class="spin"><circle class="tire" cx="265" cy="360" r="64"/><circle class="rim" cx="265" cy="360" r="46"/><line x1="265.0" y1="345.0" x2="265.0" y2="316.0"/><line x1="279.3" y1="355.4" x2="306.8" y2="346.4"/><line x1="273.8" y1="372.1" x2="290.9" y2="395.6"/><line x1="256.2" y1="372.1" x2="239.1" y2="395.6"/><line x1="250.7" y1="355.4" x2="223.2" y2="346.4"/><circle class="hub" cx="265" cy="360" r="15"/></g></g>
+  <g class="part wheel wr" data-d=".02" style="--dx:20px;--dy:95px"><g class="spin"><circle class="tire" cx="735" cy="360" r="64"/><circle class="rim" cx="735" cy="360" r="46"/><line x1="735.0" y1="345.0" x2="735.0" y2="316.0"/><line x1="749.3" y1="355.4" x2="776.8" y2="346.4"/><line x1="743.8" y1="372.1" x2="760.9" y2="395.6"/><line x1="726.2" y1="372.1" x2="709.1" y2="395.6"/><line x1="720.7" y1="355.4" x2="693.2" y2="346.4"/><circle class="hub" cx="735" cy="360" r="15"/></g></g>
+  <g class="part engine" data-d=".12" style="--dx:-70px;--dy:-200px"><rect x="150" y="304" width="150" height="52" rx="4"/><rect x="160" y="290" width="130" height="14" rx="3"/><line x1="190" y1="304" x2="190" y2="356"/><line x1="225" y1="304" x2="225" y2="356"/><line x1="260" y1="304" x2="260" y2="356"/><circle class="spin2" cx="312" cy="330" r="17"/><circle cx="312" cy="330" r="6"/></g>
+  <g class="part filter" data-d=".2" style="--dx:0px;--dy:120px"><rect x="330" y="316" width="44" height="58" rx="7"/><rect class="band" x="330" y="332" width="44" height="12"/><rect x="340" y="306" width="24" height="10" rx="2"/></g>
+  <g class="part key" data-d=".25" style="--dx:110px;--dy:-190px"><circle cx="784" cy="310" r="17"/><circle cx="784" cy="310" r="6"/><path d="M800 310 H860 V322 H850 V316 H842 V326 H832 V316 H824 V324 H814 V310"/></g>
+  <g class="part chassis" data-d="0" style="--dx:0px;--dy:12px"><path d="M115 362 L115 312 Q115 286 142 284 L860 284 Q905 286 905 322 L905 362 L811 362 A76 76 0 0 0 659 362 L341 362 A76 76 0 0 0 189 362 Z"/><line x1="125" y1="332" x2="895" y2="332"/></g>
+  <g class="part headlight" data-d=".1" style="--dx:-110px;--dy:-40px"><path d="M120 296 H178 L190 316 H120 Z"/><line x1="130" y1="306" x2="170" y2="306"/></g>
+  <g class="part ecu" data-d=".05" style="--dx:0px;--dy:-70px"><rect x="350" y="232" width="86" height="46" rx="4"/><rect class="chip" x="368" y="244" width="30" height="22"/><line x1="406" y1="248" x2="426" y2="248"/><line x1="406" y1="256" x2="426" y2="256"/><line x1="406" y1="264" x2="426" y2="264"/></g>
+  <g class="part cabin" data-d="0" style="--dx:0px;--dy:-150px"><path d="M235 284 L318 188 Q328 176 346 176 L600 176 Q626 176 646 198 L778 284 Z"/><path class="glass" d="M258 278 L326 195 Q331 190 340 190 L452 190 L452 278 Z"/><path class="glass" d="M474 278 L474 190 L598 190 Q612 190 622 202 L728 278 Z"/></g>
+</svg></div>
+  </div>
 </section>
 
 <div class="wing" aria-hidden="true"><svg class="mark" viewBox="0 0 40 16" width="40" height="16" aria-hidden="true" focusable="false"><path d="M0 16 16 0h8L8 16Z"/><path d="M14 16 26 4h6L20 16Z"/><path d="M26 16 34 8h4l-8 8Z"/></svg></div>
@@ -396,8 +472,6 @@ html{scrollbar-color:var(--steel-2) var(--black)}
   document.querySelectorAll('.rv').forEach(function(r){rio.observe(r)});
   /* index highlight */
   var links=document.querySelectorAll('.index a');
-  var iio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(a){a.classList.toggle('on',a.dataset.i===e.target.id)})}})},{threshold:[.25,.5]});
-  document.querySelectorAll('.chapter').forEach(function(c){iio.observe(c)});
   /* rail arrows */
   var rail=document.getElementById('rail');
   function step(dir){rail.scrollBy({left:dir*Math.min(rail.clientWidth*.8,360),behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'})}
@@ -469,6 +543,33 @@ html{scrollbar-color:var(--steel-2) var(--black)}
   new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis)lstart()},{threshold:0}).observe(hero);
   hero.addEventListener('pointermove',function(e){var r=hero.getBoundingClientRect();tx=e.clientX-r.left;ty=e.clientY-r.top;idle=performance.now()});
   lstart();
+})();
+</script>
+<script>
+/* ===== v4 : sections épinglées ===== */
+(function(){
+  var root=document.documentElement,RM=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var say=document.getElementById('say'),capot=document.getElementById('capot'),words=[].slice.call(document.querySelectorAll('.say .w')),parts=[].slice.call(document.querySelectorAll('.cap-svg [data-d]')),steps=[].slice.call(document.querySelectorAll('.steps li')),dots=[].slice.call(document.querySelectorAll('.dots i')),svg=document.querySelector('.cap-svg'),links=document.querySelectorAll('.index a');
+  function prog(s){var r=s.getBoundingClientRect(),tot=r.height-innerHeight;return tot>0?Math.max(0,Math.min(1,-r.top/tot)):1}
+  function fit(s){s.classList.remove('static');var pin=s.querySelector('.pin');s.classList.toggle('static',RM||pin.scrollHeight>innerHeight+1)}
+  function allIn(){words.forEach(function(w){w.classList.add('lit')});parts.forEach(function(el){el.style.setProperty('--k','1')});svg.style.setProperty('--e0','1');svg.classList.remove('has-hot');parts.forEach(function(el){el.classList.remove('hot')})}
+  var litN=-1,stepN=-2;
+  function upd(){
+    if(say.classList.contains('static')){words.forEach(function(w){w.classList.add('lit')})}else{var p=prog(say),n=Math.round(Math.min(1,p/.8)*words.length);if(n!==litN){litN=n;words.forEach(function(w,i){w.classList.toggle('lit',i<n)})}}
+    if(capot.classList.contains('static')){allIn();return}
+    var p2=prog(capot),x=Math.min(1,p2/.4),e=1-Math.pow(1-x,3);
+    svg.style.setProperty('--e0',e.toFixed(3));
+    parts.forEach(function(el){var d=parseFloat(el.getAttribute('data-d')),k=Math.max(0,Math.min(1,(e-d)/(1-d)));el.style.setProperty('--k',k.toFixed(3))});
+    var s=p2>.42?Math.min(5,Math.floor((p2-.42)/.56*6)):-1;
+    if(s!==stepN){stepN=s;capot.classList.toggle('noact',s<0);steps.forEach(function(li,i){li.classList.toggle('on',i===s)});dots.forEach(function(d,i){d.classList.toggle('on',i<=s)});
+      var hot=s>=0?steps[s].getAttribute('data-part').split(' '):[];svg.classList.toggle('has-hot',hot.length>0);
+      [].slice.call(svg.querySelectorAll('.part')).forEach(function(g){g.classList.toggle('hot',hot.some(function(h){return g.classList.contains(h)}))})}
+  }
+  function hl(){var y=innerHeight*.45,cur='accueil';['accueil','atelier','capot','urgences','contact'].forEach(function(id){var s=document.getElementById(id);if(s&&s.getBoundingClientRect().top<=y)cur=id});links.forEach(function(a){a.classList.toggle('on',a.dataset.i===cur)})}
+  var tk=false;function onS(){if(!tk){tk=true;requestAnimationFrame(function(){tk=false;upd();hl()})}}
+  function refit(){fit(say);fit(capot);litN=-1;stepN=-2;onS()}
+  addEventListener('scroll',onS,{passive:true});addEventListener('resize',refit);addEventListener('load',refit);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refit);
+  refit();
 })();
 </script>
 </body>
