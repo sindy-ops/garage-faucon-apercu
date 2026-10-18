@@ -1,0 +1,22 @@
+# Garage Faucon
+
+> ATTENTION : maquette de démonstration, pas le site officiel du garage.
+
+> Garage automobile à Bron (69500) : entretien, réparation et diagnostic de véhicules Renault et Dacia. Véhicules neufs et d’occasion.
+
+## Faits
+- Adresse : 3 rue d’Alsace-Lorraine, 69500 Bron, France
+- Téléphone : 04 78 26 80 17
+- Horaires habituels : lundi au jeudi 8h-12h et 14h-18h30 ; vendredi 8h-12h et 14h-17h30 ; fermé le samedi et le dimanche. Les périodes spéciales ne sont pas incluses.
+- Prestations : entretien et révision, réparation mécanique, pneus, diagnostic, clés, véhicules neufs et d’occasion.
+- Prix, délais et disponibilité : non indiqués sur le site, à demander par téléphone.
+
+## Pages
+- [Accueil](./)
+- [Mentions légales](./mentions-legales/)
+- [Politique de confidentialité](./confidentialite/)
+
+## Notes
+- Le site ne collecte aucune donnée et n’utilise aucun cookie.
+- Les images d’ambiance sont générées par intelligence artificielle et ne montrent pas l’atelier.
+- La note « 4,4 / 5 » et les avis cités viennent de la fiche Google du garage ; ils sont recopiés sans modification.
